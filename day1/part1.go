@@ -39,7 +39,7 @@ func (s *Part1Solver) Read(path string) error {
 	file, err := os.Open(path)
 	if err != nil {
 		fmt.Printf("Error opening file: %v\n", err)
-		return nil
+		return err
 	}
 	defer file.Close()
 	heap.Init(&s.list1)
@@ -66,6 +66,7 @@ func (s *Part1Solver) Read(path string) error {
 
 	if err := scanner.Err(); err != nil {
 		fmt.Printf("Error reading file: %v\n", err)
+		return err
 	}
 
 	return nil
