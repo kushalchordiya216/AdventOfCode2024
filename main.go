@@ -8,6 +8,7 @@ import (
 	"github.com/kushalchordiya216/AOC2024/common"
 	"github.com/kushalchordiya216/AOC2024/day1"
 	"github.com/kushalchordiya216/AOC2024/day2"
+	"github.com/kushalchordiya216/AOC2024/day3"
 )
 
 func main() {
@@ -18,7 +19,7 @@ func main() {
 	day, err1 := strconv.Atoi(os.Args[1])
 	part, err2 := strconv.Atoi(os.Args[2])
 	if err1 != nil || err2 != nil || day <= 0 || day > 25 || part < 1 || part > 2 {
-		fmt.Println("Please provide a valid positive integer")
+		fmt.Println("Please provide a valid input")
 		return
 	}
 	var solver common.Solver
@@ -35,6 +36,12 @@ func main() {
 			solver = &day2.Part1Solver{}
 		} else {
 			solver = &day2.Part2Solver{}
+		}
+	case 3:
+		if part == 1 {
+			solver = &day3.Part1Solver{}
+		} else {
+			solver = &day3.Part2Solver{}
 		}
 	}
 	if err := solver.Read(fmt.Sprintf("day%d/input.txt", day)); err != nil {
