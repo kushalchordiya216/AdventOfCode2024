@@ -24,6 +24,13 @@ func main() {
 		fmt.Println("Please provide a valid input")
 		return
 	}
+
+	var path string
+	if len(os.Args) >= 4 {
+		path = os.Args[3]
+	} else {
+		path = fmt.Sprintf("day%d/input.txt", day)
+	}
 	var solver common.Solver
 
 	switch day {
@@ -58,7 +65,8 @@ func main() {
 			solver = &day5.Part2Solver{}
 		}
 	}
-	if err := solver.Read(fmt.Sprintf("day%d/input.txt", day)); err != nil {
+
+	if err := solver.Read(path); err != nil {
 		fmt.Printf("Error reading input: %v\n", err)
 		return
 	}
