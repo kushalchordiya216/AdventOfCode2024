@@ -14,7 +14,7 @@ func (s *Part2Solver) Read(path string) error {
 	return nil
 }
 
-func check(s *Part2Solver, x int, y int) bool {
+func checkIfValidX(s *Part2Solver, x int, y int) bool {
 	MCount := 0
 	SCount := 0
 	offsets := [][]int{{1, 1}, {1, -1}, {-1, 1}, {-1, -1}}
@@ -34,16 +34,16 @@ func check(s *Part2Solver, x int, y int) bool {
 		}
 		corners = append(corners, []int{newX, newY})
 	}
-	// this ensures we have the right amount of M and S
-	// now only need to check their relative positioning at the corner of the 'X' shapre
+	// this ensures we have the right amount of M and S on the corners of the 'X'
 	if MCount != 2 || SCount != 2 {
 		return false
 	}
 	/*
 		checks for the existence of the such shapes
-		M        S
+		M       S
 		    A
-		S      	 M
+		S      	M
+		if found, discard the 'X' from consideration
 	*/
 	if s.grid[corners[0][0]][corners[0][1]] == s.grid[corners[3][0]][corners[3][1]] || s.grid[corners[1][0]][corners[1][1]] == s.grid[corners[2][0]][corners[2][1]] {
 		return false
@@ -56,7 +56,7 @@ func (s *Part2Solver) Solve() int {
 	for x := range s.grid {
 		for y := range s.grid[x] {
 			if s.grid[x][y] == 'A' {
-				if check(s, x, y) {
+				if checkIfValidX(s, x, y) {
 					result += 1
 				}
 			}
