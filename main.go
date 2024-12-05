@@ -9,6 +9,7 @@ import (
 	"github.com/kushalchordiya216/AOC2024/day1"
 	"github.com/kushalchordiya216/AOC2024/day2"
 	"github.com/kushalchordiya216/AOC2024/day3"
+	"github.com/kushalchordiya216/AOC2024/day4"
 )
 
 func main() {
@@ -42,6 +43,12 @@ func main() {
 			solver = &day3.Part1Solver{}
 		} else {
 			solver = &day3.Part2Solver{}
+		}
+	case 4:
+		if part == 1 {
+			solver = &day4.Part1Solver{}
+		} else {
+			solver = &day4.Part2Solver{}
 		}
 	}
 	if err := solver.Read(fmt.Sprintf("day%d/input.txt", day)); err != nil {
