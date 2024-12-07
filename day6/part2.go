@@ -1,5 +1,7 @@
 package day6
 
+import "fmt"
+
 type Part2Solver struct {
 	grid [][]rune
 	x, y int
@@ -7,16 +9,9 @@ type Part2Solver struct {
 }
 
 func (s *Part2Solver) Read(path string) error {
-	solver := Part1Solver{grid: s.grid, x: s.x, y: s.y, d: s.d}
-	err := solver.Read(path)
-	if err != nil {
-		return err
-	}
-	s.grid = solver.grid
-	s.x = solver.x
-	s.y = solver.y
-	s.d = solver.d
-	return nil
+	var err error
+	s.grid, s.x, s.y, s.d, err = readInput(path)
+	return err
 }
 
 func checkIfLooping(grid [][]rune, x int, y int, d Direction) bool {
@@ -58,9 +53,11 @@ func checkIfLooping(grid [][]rune, x int, y int, d Direction) bool {
 }
 
 func (s *Part2Solver) Solve() int {
-	solver := Part1Solver{grid: s.grid, x: s.x, y: s.y, d: s.d}
-	solver.Solve() // modify the board to mark guards visited path
-	s.grid = solver.grid
+	err := traceGuardPath(s.grid, s.x, s.y, s.d)
+	if err != nil {
+		fmt.Println(err)
+		return 0
+	}
 	result := 0
 	for i := range s.grid {
 		for j := range s.grid[i] {

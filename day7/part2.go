@@ -11,12 +11,9 @@ type Part2Solver struct {
 }
 
 func (s *Part2Solver) Read(path string) error {
-	targets, numLists, err := readInput(path)
-	if err != nil {
-		return err
-	}
-	s.targets, s.numLists = targets, numLists
-	return nil
+	var err error
+	s.targets, s.numLists, err = readInput(path)
+	return err
 }
 
 func concatenateNums(a, b int) int {

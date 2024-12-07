@@ -6,12 +6,9 @@ type Part1Solver struct {
 }
 
 func (s *Part1Solver) Read(path string) error {
-	targets, numLists, err := readInput(path)
-	if err != nil {
-		return err
-	}
-	s.targets, s.numLists = targets, numLists
-	return nil
+	var err error
+	s.targets, s.numLists, err = readInput(path)
+	return err
 }
 
 func checkIfValidEquation(target int, result int, remaining []int) bool {
