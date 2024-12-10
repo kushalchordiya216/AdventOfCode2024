@@ -15,13 +15,6 @@ func (s *Part2Solver) Read(path string) error {
 	return err
 }
 
-func printAll(blocks []Block) {
-	for _, block := range blocks {
-		fmt.Print(block)
-	}
-	fmt.Println("")
-}
-
 func (s *Part2Solver) getBlockIndexById(id int) int {
 	for idx, block := range s.blocks {
 		if block.id == id {
