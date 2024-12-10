@@ -20,7 +20,6 @@ func (s *Part2Solver) Read(path string) error {
 }
 
 func (s *Part2Solver) Solve() int {
-	fmt.Println("In my lane")
 	pattern := `mul\((\d+),(\d+)\)|do\(\)|don't\(\)`
 	matches := regexp.MustCompile(pattern).FindAllStringSubmatch(s.text, -1)
 	flag := 1

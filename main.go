@@ -13,6 +13,7 @@ import (
 	"github.com/kushalchordiya216/AOC2024/day5"
 	"github.com/kushalchordiya216/AOC2024/day6"
 	"github.com/kushalchordiya216/AOC2024/day7"
+	"github.com/kushalchordiya216/AOC2024/day8"
 )
 
 func main() {
@@ -77,6 +78,12 @@ func main() {
 			solver = &day7.Part1Solver{}
 		} else {
 			solver = &day7.Part2Solver{}
+		}
+	case 8:
+		if part == 1 {
+			solver = &day8.Part1Solver{}
+		} else {
+			solver = &day8.Part2Solver{}
 		}
 	}
 
