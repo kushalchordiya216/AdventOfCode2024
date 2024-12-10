@@ -18,6 +18,28 @@ import (
 	"github.com/kushalchordiya216/AOC2024/day9"
 )
 
+func selectSolver(day, part int) common.Solver {
+	solverMap := map[int]map[int]common.Solver{
+		1:  {1: &day1.Part1Solver{}, 2: &day1.Part2Solver{}},
+		2:  {1: &day2.Part1Solver{}, 2: &day2.Part2Solver{}},
+		3:  {1: &day3.Part1Solver{}, 2: &day3.Part2Solver{}},
+		4:  {1: &day4.Part1Solver{}, 2: &day4.Part2Solver{}},
+		5:  {1: &day5.Part1Solver{}, 2: &day5.Part2Solver{}},
+		6:  {1: &day6.Part1Solver{}, 2: &day6.Part2Solver{}},
+		7:  {1: &day7.Part1Solver{}, 2: &day7.Part2Solver{}},
+		8:  {1: &day8.Part1Solver{}, 2: &day8.Part2Solver{}},
+		9:  {1: &day9.Part1Solver{}, 2: &day9.Part2Solver{}},
+		10: {1: &day10.Part1Solver{}, 2: &day10.Part2Solver{}},
+	}
+
+	if dayMap, exists := solverMap[day]; exists {
+		if solver, exists := dayMap[part]; exists {
+			return solver
+		}
+	}
+	return nil
+}
+
 func main() {
 	if len(os.Args) < 3 {
 		fmt.Println("Please provide the day and part to be solved")
@@ -36,71 +58,11 @@ func main() {
 	} else {
 		path = fmt.Sprintf("day%d/input.txt", day)
 	}
-	var solver common.Solver
-
-	switch day {
-	case 1:
-		if part == 1 {
-			solver = &day1.Part1Solver{}
-		} else {
-			solver = &day1.Part2Solver{}
-		}
-	case 2:
-		if part == 1 {
-			solver = &day2.Part1Solver{}
-		} else {
-			solver = &day2.Part2Solver{}
-		}
-	case 3:
-		if part == 1 {
-			solver = &day3.Part1Solver{}
-		} else {
-			solver = &day3.Part2Solver{}
-		}
-	case 4:
-		if part == 1 {
-			solver = &day4.Part1Solver{}
-		} else {
-			solver = &day4.Part2Solver{}
-		}
-	case 5:
-		if part == 1 {
-			solver = &day5.Part1Solver{}
-		} else {
-			solver = &day5.Part2Solver{}
-		}
-	case 6:
-		if part == 1 {
-			solver = &day6.Part1Solver{}
-		} else {
-			solver = &day6.Part2Solver{}
-		}
-	case 7:
-		if part == 1 {
-			solver = &day7.Part1Solver{}
-		} else {
-			solver = &day7.Part2Solver{}
-		}
-	case 8:
-		if part == 1 {
-			solver = &day8.Part1Solver{}
-		} else {
-			solver = &day8.Part2Solver{}
-		}
-	case 9:
-		if part == 1 {
-			solver = &day9.Part1Solver{}
-		} else {
-			solver = &day9.Part2Solver{}
-		}
-	case 10:
-		if part == 1 {
-			solver = &day10.Part1Solver{}
-		} else {
-			solver = &day10.Part2Solver{}
-		}
+	solver := selectSolver(day, part)
+	if solver == nil {
+		fmt.Printf("Day %d, Part %d solution: not yet implemented", day, part)
+		os.Exit(1)
 	}
-
 	if err := solver.Read(path); err != nil {
 		fmt.Printf("Error reading input: %v\n", err)
 		return
