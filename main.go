@@ -9,6 +9,7 @@ import (
 	"github.com/kushalchordiya216/AOC2024/day1"
 	"github.com/kushalchordiya216/AOC2024/day10"
 	"github.com/kushalchordiya216/AOC2024/day11"
+	"github.com/kushalchordiya216/AOC2024/day12"
 	"github.com/kushalchordiya216/AOC2024/day2"
 	"github.com/kushalchordiya216/AOC2024/day3"
 	"github.com/kushalchordiya216/AOC2024/day4"
@@ -32,6 +33,7 @@ func selectSolver(day, part int) common.Solver {
 		9:  {1: &day9.Part1Solver{}, 2: &day9.Part2Solver{}},
 		10: {1: &day10.Part1Solver{}, 2: &day10.Part2Solver{}},
 		11: {1: &day11.Part1Solver{}, 2: &day11.Part2Solver{}},
+		12: {1: &day12.Part1Solver{}, 2: &day12.Part2Solver{}},
 	}
 
 	if dayMap, exists := solverMap[day]; exists {
