@@ -2,15 +2,16 @@ package day15
 
 import (
 	"bufio"
-	"github.com/kushalchordiya216/AOC2024/common"
 	"log"
 	"os"
+
+	"github.com/kushalchordiya216/AOC2024/common/utils"
 )
 
 type Part1Solver struct {
-	grid     common.Grid[rune]
-	position common.Coord
-	moves    []common.Direction
+	grid     utils.Grid[rune]
+	position utils.Coord
+	moves    []utils.Direction
 }
 
 func (s *Part1Solver) Read(path string) error {
@@ -36,16 +37,16 @@ func (s *Part1Solver) Read(path string) error {
 			for _, chr := range line {
 				switch chr {
 				case '<':
-					s.moves = append(s.moves, common.Left)
+					s.moves = append(s.moves, utils.Left)
 					break
 				case '>':
-					s.moves = append(s.moves, common.Right)
+					s.moves = append(s.moves, utils.Right)
 					break
 				case '^':
-					s.moves = append(s.moves, common.Up)
+					s.moves = append(s.moves, utils.Up)
 					break
 				case 'v':
-					s.moves = append(s.moves, common.Down)
+					s.moves = append(s.moves, utils.Down)
 					break
 				}
 			}
@@ -53,7 +54,7 @@ func (s *Part1Solver) Read(path string) error {
 			s.grid = append(s.grid, []rune(line))
 			for x, chr := range line {
 				if chr == '@' {
-					s.position = common.Coord{
+					s.position = utils.Coord{
 						X: x,
 						Y: lineNum,
 					}
@@ -65,7 +66,7 @@ func (s *Part1Solver) Read(path string) error {
 	return nil
 }
 
-func (s *Part1Solver) canMove(move common.Direction) bool {
+func (s *Part1Solver) canMove(move utils.Direction) bool {
 	offset := move.GetOffset()
 	current := s.position
 	for {
@@ -84,7 +85,7 @@ func (s *Part1Solver) canMove(move common.Direction) bool {
 }
 
 // Shift shifts all grid values by offset
-func (s *Part1Solver) shift(move common.Direction) {
+func (s *Part1Solver) shift(move utils.Direction) {
 	offset := move.GetOffset()
 	current := s.position
 	for {
@@ -101,7 +102,7 @@ func (s *Part1Solver) shift(move common.Direction) {
 	s.grid[s.position.Y][s.position.X] = '.'
 }
 
-func (s *Part1Solver) makeMove(move common.Direction) {
+func (s *Part1Solver) makeMove(move utils.Direction) {
 	if !s.canMove(move) {
 		return
 	}

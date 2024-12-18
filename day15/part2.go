@@ -2,15 +2,15 @@ package day15
 
 import (
 	"bufio"
-	"github.com/kushalchordiya216/AOC2024/common"
+	"github.com/kushalchordiya216/AOC2024/common/utils"
 	"log"
 	"os"
 )
 
 type Part2Solver struct {
-	grid     common.Grid[rune]
-	position common.Coord
-	moves    []common.Direction
+	grid     utils.Grid[rune]
+	position utils.Coord
+	moves    []utils.Direction
 }
 
 func (s *Part2Solver) Read(path string) error {
@@ -36,16 +36,16 @@ func (s *Part2Solver) Read(path string) error {
 			for _, chr := range line {
 				switch chr {
 				case '<':
-					s.moves = append(s.moves, common.Left)
+					s.moves = append(s.moves, utils.Left)
 					break
 				case '>':
-					s.moves = append(s.moves, common.Right)
+					s.moves = append(s.moves, utils.Right)
 					break
 				case '^':
-					s.moves = append(s.moves, common.Up)
+					s.moves = append(s.moves, utils.Up)
 					break
 				case 'v':
-					s.moves = append(s.moves, common.Down)
+					s.moves = append(s.moves, utils.Down)
 					break
 				}
 			}
@@ -71,7 +71,7 @@ func (s *Part2Solver) Read(path string) error {
 			s.grid = append(s.grid, row)
 			for x, chr := range row {
 				if chr == '@' {
-					s.position = common.Coord{
+					s.position = utils.Coord{
 						X: x,
 						Y: lineNum,
 					}
@@ -83,11 +83,11 @@ func (s *Part2Solver) Read(path string) error {
 	return nil
 }
 
-func (s *Part2Solver) canMove(move common.Direction) bool {
+func (s *Part2Solver) canMove(move utils.Direction) bool {
 	offset := move.GetOffset()
 	current := s.position
-	queue := []common.Coord{current}
-	visited := make(map[common.Coord]bool)
+	queue := []utils.Coord{current}
+	visited := make(map[utils.Coord]bool)
 	for len(queue) > 0 {
 		current = queue[0]
 		queue = queue[1:]
@@ -99,14 +99,14 @@ func (s *Part2Solver) canMove(move common.Direction) bool {
 		if s.grid.WithinBounds(current) {
 			if s.grid[current.Y][current.X] == '[' {
 				queue = append(queue, current)
-				if move == common.Up || move == common.Down {
-					neighbor := current.PushForward(common.Coord{X: 1, Y: 0})
+				if move == utils.Up || move == utils.Down {
+					neighbor := current.PushForward(utils.Coord{X: 1, Y: 0})
 					queue = append(queue, neighbor)
 				}
 			} else if s.grid[current.Y][current.X] == ']' {
 				queue = append(queue, current)
-				if move == common.Up || move == common.Down {
-					neighbor := current.PushForward(common.Coord{X: -1, Y: 0})
+				if move == utils.Up || move == utils.Down {
+					neighbor := current.PushForward(utils.Coord{X: -1, Y: 0})
 					queue = append(queue, neighbor)
 				}
 			} else if s.grid[current.Y][current.X] == '#' {
@@ -119,18 +119,18 @@ func (s *Part2Solver) canMove(move common.Direction) bool {
 	return true
 }
 
-func (s *Part2Solver) recursiveVerticalShift(move common.Direction, current common.Coord, visited map[common.Coord]bool) {
-	var next, adjacentNext common.Coord
+func (s *Part2Solver) recursiveVerticalShift(move utils.Direction, current utils.Coord, visited map[utils.Coord]bool) {
+	var next, adjacentNext utils.Coord
 	if s.grid[current.Y][current.X] == '.' || visited[current] {
 		return
 	}
 	visited[current] = true
 	next = current.PushForward(move.GetOffset())
 	if s.grid[next.Y][next.X] == '[' {
-		adjacentNext = next.PushForward(common.Coord{X: 1, Y: 0})
+		adjacentNext = next.PushForward(utils.Coord{X: 1, Y: 0})
 		s.recursiveVerticalShift(move, adjacentNext, visited)
 	} else if s.grid[next.Y][next.X] == ']' {
-		adjacentNext = next.PushForward(common.Coord{X: -1, Y: 0})
+		adjacentNext = next.PushForward(utils.Coord{X: -1, Y: 0})
 		s.recursiveVerticalShift(move, adjacentNext, visited)
 	}
 	s.recursiveVerticalShift(move, next, visited)
@@ -140,8 +140,8 @@ func (s *Part2Solver) recursiveVerticalShift(move common.Direction, current comm
 }
 
 // Shift shifts all grid values by offset
-func (s *Part2Solver) shift(move common.Direction) {
-	if move == common.Left || move == common.Right { // Horizontal shift is unaffected by larger boxes
+func (s *Part2Solver) shift(move utils.Direction) {
+	if move == utils.Left || move == utils.Right { // Horizontal shift is unaffected by larger boxes
 		offset := move.GetOffset()
 		current := s.position
 		for {
@@ -156,13 +156,13 @@ func (s *Part2Solver) shift(move common.Direction) {
 			current = prev
 		}
 	} else {
-		visited := make(map[common.Coord]bool)
+		visited := make(map[utils.Coord]bool)
 		s.recursiveVerticalShift(move, s.position, visited)
 	}
 	s.grid[s.position.Y][s.position.X] = '.'
 }
 
-func (s *Part2Solver) makeMove(move common.Direction) {
+func (s *Part2Solver) makeMove(move utils.Direction) {
 	if !s.canMove(move) {
 		return
 	}
