@@ -41,7 +41,12 @@ func (s *Part1Solver) Read(path string) error {
 		fmt.Printf("Error opening file: %v\n", err)
 		return err
 	}
-	defer file.Close()
+	defer func(file *os.File) {
+		err := file.Close()
+		if err != nil {
+			fmt.Printf("Error closing file: %v\n", err)
+		}
+	}(file)
 	heap.Init(&s.list1)
 	heap.Init(&s.list2)
 

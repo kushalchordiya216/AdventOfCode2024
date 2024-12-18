@@ -21,7 +21,12 @@ func (s *Part2Solver) Read(path string) error {
 		fmt.Printf("Error opening file: %v\n", err)
 		return nil
 	}
-	defer file.Close()
+	defer func(file *os.File) {
+		err := file.Close()
+		if err != nil {
+			fmt.Printf("Error closing file: %v\n", err)
+		}
+	}(file)
 
 	s.lookup1 = make(map[int]int)
 	s.lookup2 = make(map[int]int)
