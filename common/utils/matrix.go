@@ -54,6 +54,36 @@ func (d Direction) RotateRight() Direction {
 	}
 }
 
+func (d Direction) RotateLeft() Direction {
+	switch d {
+	case Up:
+		return Left
+	case Down:
+		return Right
+	case Left:
+		return Down
+	case Right:
+		return Up
+	default:
+		return Up
+	}
+}
+
+func (d Direction) Reverse() Direction {
+	switch d {
+	case Up:
+		return Down
+	case Down:
+		return Up
+	case Left:
+		return Right
+	case Right:
+		return Left
+	default:
+		return Up
+	}
+}
+
 func (d Direction) GetOffset() Coord {
 	switch d {
 	case Up:
