@@ -5,6 +5,7 @@ import (
 	"github.com/kushalchordiya216/AOC2024/day14"
 	"github.com/kushalchordiya216/AOC2024/day15"
 	"github.com/kushalchordiya216/AOC2024/day16"
+	"github.com/kushalchordiya216/AOC2024/day17"
 	"github.com/kushalchordiya216/AOC2024/day18"
 	"os"
 	"strconv"
@@ -43,6 +44,7 @@ func selectSolver(day, part int) common.Solver {
 		14: {1: &day14.Part1Solver{}, 2: &day14.Part2Solver{}},
 		15: {1: &day15.Part1Solver{}, 2: &day15.Part2Solver{}},
 		16: {1: &day16.Part1Solver{}, 2: &day16.Part2Solver{}},
+		17: {1: &day17.Part1Solver{}, 2: &day17.Part2Solver{}},
 		18: {1: &day18.Part1Solver{}, 2: &day18.Part2Solver{}},
 	}
 
