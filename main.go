@@ -8,6 +8,7 @@ import (
 	"github.com/kushalchordiya216/AOC2024/day17"
 	"github.com/kushalchordiya216/AOC2024/day18"
 	"github.com/kushalchordiya216/AOC2024/day19"
+	"github.com/kushalchordiya216/AOC2024/day20"
 	"os"
 	"strconv"
 
@@ -48,6 +49,7 @@ func selectSolver(day, part int) common.Solver {
 		17: {1: &day17.Part1Solver{}, 2: &day17.Part2Solver{}},
 		18: {1: &day18.Part1Solver{}, 2: &day18.Part2Solver{}},
 		19: {1: &day19.Part1Solver{}, 2: &day19.Part2Solver{}},
+		20: {1: &day20.Part1Solver{}, 2: &day20.Part2Solver{}},
 	}
 
 	if dayMap, exists := solverMap[day]; exists {
@@ -87,5 +89,4 @@ func main() {
 	}
 	result := solver.Solve()
 	fmt.Printf("Day %d, Part %d solution: %d\n", day, part, result)
-
 }

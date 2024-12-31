@@ -114,7 +114,7 @@ func (d Direction) GetOffset() Coord {
 	}
 }
 
-type Grid[T int | rune] [][]T
+type Grid[T int | rune | byte] [][]T
 
 func (g Grid[T]) WithinBounds(coord Coord) bool {
 	return coord.X >= 0 && coord.X < len(g[0]) && coord.Y >= 0 && coord.Y < len(g)
