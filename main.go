@@ -2,6 +2,9 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"strconv"
+
 	"github.com/kushalchordiya216/AOC2024/day14"
 	"github.com/kushalchordiya216/AOC2024/day15"
 	"github.com/kushalchordiya216/AOC2024/day16"
@@ -9,8 +12,7 @@ import (
 	"github.com/kushalchordiya216/AOC2024/day18"
 	"github.com/kushalchordiya216/AOC2024/day19"
 	"github.com/kushalchordiya216/AOC2024/day20"
-	"os"
-	"strconv"
+	"github.com/kushalchordiya216/AOC2024/day22"
 
 	"github.com/kushalchordiya216/AOC2024/common"
 	"github.com/kushalchordiya216/AOC2024/day1"
@@ -50,6 +52,7 @@ func selectSolver(day, part int) common.Solver {
 		18: {1: &day18.Part1Solver{}, 2: &day18.Part2Solver{}},
 		19: {1: &day19.Part1Solver{}, 2: &day19.Part2Solver{}},
 		20: {1: &day20.Part1Solver{}, 2: &day20.Part2Solver{}},
+		22: {1: &day22.Part1Solver{}},
 	}
 
 	if dayMap, exists := solverMap[day]; exists {
