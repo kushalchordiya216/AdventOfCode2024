@@ -51,11 +51,10 @@ func iterate(number int) int {
 func (s *Part1Solver) Solve() int {
 	result := 0
 	for _, num := range s.numbers {
-		for i := 0; i < 2000; i++ {
+		for range 2000 {
 			num = iterate(num)
 		}
 		result += num
 	}
-
 	return result
 }

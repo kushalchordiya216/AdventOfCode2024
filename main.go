@@ -54,7 +54,7 @@ func selectSolver(day, part int) common.Solver {
 		19: {1: &day19.Part1Solver{}, 2: &day19.Part2Solver{}},
 		20: {1: &day20.Part1Solver{}, 2: &day20.Part2Solver{}},
 		21: {1: &day21.Part1Solver{}, 2: &day21.Part2Solver{}},
-		22: {1: &day22.Part1Solver{}},
+		22: {1: &day22.Part1Solver{}, 2: &day22.Part2Solver{}},
 	}
 
 	if dayMap, exists := solverMap[day]; exists {
